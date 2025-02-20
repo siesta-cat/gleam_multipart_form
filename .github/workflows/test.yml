@@ -15,9 +15,9 @@ jobs:
         id: tool_versions
         shell: bash
         run: |
-          export file=$(cat .tool-versions | sed 's/ /::/g')
+          export file=$(cat .tool-versions | sed 's/ /=/g')
           for line in $file; do
-            echo "name=$line" >> $GITHUB_OUTPUT
+            echo $line >> $GITHUB_OUTPUT
           done
       - uses: erlef/setup-beam@v1
         with:
