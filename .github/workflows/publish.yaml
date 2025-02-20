@@ -22,11 +22,11 @@ jobs:
         run: echo $(grep version gleam.toml | sed 's/ //g' | sed 's/"//g') >> $GITHUB_OUTPUT
       - name: Push tag
         id: tag
-        uses: laputansoft/github-tag-action@v4.6 # v6.2
-        with:
+        uses: Akryum/release-tag
+        env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ steps.version.outputs.version }}
-          default_bump: false
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
       - name: Create Github release
         uses: softprops/action-gh-release@c95fe1489396fe8a9eb87c0abf8aa5b2ef267fda # v2
         with:
