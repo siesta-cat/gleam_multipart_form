@@ -22,7 +22,7 @@ jobs:
         run: echo $(grep version gleam.toml | sed 's/ //g' | sed 's/"//g') >> $GITHUB_OUTPUT
       - name: Push tag
         id: tag
-        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
+        uses: laputansoft/github-tag-action@v4.6 # v6.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ steps.version.outputs.version }}
