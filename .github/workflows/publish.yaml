@@ -52,8 +52,3 @@ jobs:
         env:
           HEXPM_USER: ${{ secrets.hex_user }}
           HEXPM_PASS: ${{ secrets.hex_pass }}
-      - name: Publish docs on hex
-        run: gleam docs publish
-        env:
-          HEXPM_USER: ${{ secrets.hex_user }}
-          HEXPM_PASS: ${{ secrets.hex_pass }}
