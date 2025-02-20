@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: get gleam and otp versions
+        id: tool_versions
+        shell: bash
+        run: |
+          export file=$(cat .tool-versions | sed 's/ /::/g')
+          for line in $file; do
+            echo "name=$line" >> $GITHUB_OUTPUT
+          done
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ steps.tool_versions.outputs.erlang }}
+          gleam-version: ${{ steps.tool_versions.outputs.gleam }}
+          rebar3-version: "3"
+      - run: gleam deps download
+      - run: gleam test
+      - run: gleam format --check src test
