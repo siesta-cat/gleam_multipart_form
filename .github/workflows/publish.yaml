@@ -16,6 +16,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - name: get gleam and otp versions
+        id: tool_versions
+        shell: bash
+        run: |
+          export file=$(cat .tool-versions | sed 's/ /=/g')
+          for line in $file; do
+            echo $line >> $GITHUB_OUTPUT
+          done
+      - uses: erlef/setup-beam@5304e04ea2b355f03681464e683d92e3b2f18451 # v1
+        with:
+          otp-version: ${{ steps.tool_versions.outputs.erlang }}
+          gleam-version: ${{ steps.tool_versions.outputs.gleam }}
+          rebar3-version: "3"
       - name: Get version from gleam.toml
         id: version
         shell: bash
