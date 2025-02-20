@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: get gleam and otp versions
         id: tool_versions
         shell: bash
@@ -19,7 +19,7 @@ jobs:
           for line in $file; do
             echo $line >> $GITHUB_OUTPUT
           done
-      - uses: erlef/setup-beam@v1
+      - uses: erlef/setup-beam@5304e04ea2b355f03681464e683d92e3b2f18451 # v1
         with:
           otp-version: ${{ steps.tool_versions.outputs.erlang }}
           gleam-version: ${{ steps.tool_versions.outputs.gleam }}
