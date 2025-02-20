@@ -22,7 +22,7 @@ jobs:
         run: echo $(grep version gleam.toml | sed 's/ //g' | sed 's/"//g') >> $GITHUB_OUTPUT
       - name: Push tag
         id: tag
-        uses: Akryum/release-tag
+        uses: akryum/release-tag
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         with:
