@@ -11,7 +11,7 @@ on:
       - completed
 
 jobs:
-  tag:
+  release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,7 +21,7 @@ jobs:
         shell: bash
         run: echo $(grep version gleam.toml | sed 's/ //g' | sed 's/"//g') >> $GITHUB_OUTPUT
       - name: Push tag
-        id: tag
+        shell: bash
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
