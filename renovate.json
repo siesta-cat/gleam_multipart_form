@@ -3,5 +3,8 @@
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "rangeStrategy": "auto",
   "bumpVersion": "patch",
-  "automerge": true
+  "automerge": true,
+  "lockFileMaintenance": {
+    "enabled": true 
+  }
 }
