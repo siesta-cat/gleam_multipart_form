@@ -45,14 +45,14 @@ jobs:
 
           echo "pushed_tag=$pushed_tag" >> $GITHUB_OUTPUT
       - name: Create Github release
-        if: steps.tag.outputs.pushed_tag == "true"
+        if: steps.tag.outputs.pushed_tag
         uses: softprops/action-gh-release@c95fe1489396fe8a9eb87c0abf8aa5b2ef267fda # v2
         with:
           generate_release_notes: true
           make_latest: true
           tag_name: v${{ steps.version.outputs.version }}
       - name: Publish module on hex
-        if: steps.tag.outputs.pushed_tag == "true"
+        if: steps.tag.outputs.pushed_tag
         run: gleam publish --yes
         env:
           HEXPM_USER: ${{ secrets.hex_user }}
