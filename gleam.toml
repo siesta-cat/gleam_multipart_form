@@ -1,5 +1,5 @@
 name = "multipart_form"
-version = "1.0.0"
+version = "1.1.0"
 description = "Small library to generate multipart/form-data requests and parse them"
 licences = ["Apache-2.0"]
 repository = { type = "github", user = "siesta-cat", repo = "gleam_multipart_form" }
