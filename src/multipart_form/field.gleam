@@ -2,6 +2,7 @@ import gleam/bit_array
 
 pub type FormBody {
   String(String)
+  StringWithType(content: String, content_type: String)
   File(name: String, content_type: String, content: BitArray)
 }
 
@@ -25,6 +26,14 @@ pub fn to_bit_array(
       "Content-Disposition: form-data; name=\"":utf8,
       field:utf8,
       "\"\r\n\r\n":utf8,
+      content:utf8,
+    >>
+    StringWithType(content, type_) -> <<
+      "Content-Disposition: form-data; name=\"":utf8,
+      field:utf8,
+      "\"\r\nContent-Type: ":utf8,
+      type_:utf8,
+      "\r\n\r\n":utf8,
       content:utf8,
     >>
   }

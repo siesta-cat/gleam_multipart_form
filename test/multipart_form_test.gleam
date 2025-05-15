@@ -34,6 +34,7 @@ pub fn parses_request_test() {
   let expected_form = [
     #("one", field.String("one")),
     #("two", field.String("two")),
+    #("xml", field.StringWithType("xml", "application/xml")),
   ]
 
   let req =
@@ -52,6 +53,8 @@ pub fn parses_request_test() {
       "Content-Disposition: form-data; name=\"one\"\r\n\r\none\r\n":utf8,
       "--9923848\r\n":utf8,
       "Content-Disposition: form-data; name=\"two\"\r\n\r\ntwo\r\n":utf8,
+      "--9923848\r\n":utf8,
+      "Content-Disposition: form-data; name=\"xml\"\r\nContent-Type: application/xml\r\n\r\nxml\r\n":utf8,
       "--9923848--":utf8,
     >>)
 
@@ -70,6 +73,7 @@ pub fn to_request_test() {
   let form = [
     #("describe", field.String("description")),
     #("content", field.String("disposed")),
+    #("json", field.StringWithType("json", "application/json")),
   ]
 
   let expected_req =
@@ -83,6 +87,8 @@ pub fn to_request_test() {
       "Content-Disposition: form-data; name=\"describe\"\r\n\r\ndescription\r\n":utf8,
       "--gleam_multipart_form\r\n":utf8,
       "Content-Disposition: form-data; name=\"content\"\r\n\r\ndisposed\r\n":utf8,
+      "--gleam_multipart_form\r\n":utf8,
+      "Content-Disposition: form-data; name=\"json\"\r\nContent-Type: application/json\r\n\r\njson\r\n":utf8,
       "--gleam_multipart_form--":utf8,
     >>)
 
