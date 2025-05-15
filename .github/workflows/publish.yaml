@@ -43,16 +43,17 @@ jobs:
           git tag -a v${{ steps.version.outputs.version }} -m ""
           git push origin v${{ steps.version.outputs.version }} && export pushed_tag=true || export pushed_tag=false
 
+          echo $pushed_tag
           echo "pushed_tag=$pushed_tag" >> $GITHUB_OUTPUT
       - name: Create Github release
-        if: steps.tag.outputs.pushed_tag == true
+        if: steps.tag.outputs.pushed_tag == 'true'
         uses: softprops/action-gh-release@da05d552573ad5aba039eaac05058a918a7bf631 # v2
         with:
           generate_release_notes: true
           make_latest: true
           tag_name: v${{ steps.version.outputs.version }}
       - name: Publish module on hex
-        if: steps.tag.outputs.pushed_tag == true
+        if: steps.tag.outputs.pushed_tag == 'true'
         run: gleam publish --yes
         env:
           HEXPM_USER: ${{ secrets.hex_user }}
