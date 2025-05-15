@@ -43,7 +43,6 @@ jobs:
           git tag -a v${{ steps.version.outputs.version }} -m ""
           git push origin v${{ steps.version.outputs.version }} && export pushed_tag=true || export pushed_tag=false
 
-          echo $pushed_tag
           echo "pushed_tag=$pushed_tag" >> $GITHUB_OUTPUT
       - name: Create Github release
         if: steps.tag.outputs.pushed_tag == 'true'
