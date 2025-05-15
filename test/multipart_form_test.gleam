@@ -34,6 +34,7 @@ pub fn parses_request_test() {
   let expected_form = [
     #("one", field.String("one")),
     #("two", field.String("two")),
+    #("xml", field.StringWithType("xml", "application/xml")),
   ]
 
   let req =
@@ -52,6 +53,8 @@ pub fn parses_request_test() {
       "Content-Disposition: form-data; name=\"one\"\r\n\r\none\r\n":utf8,
       "--9923848\r\n":utf8,
       "Content-Disposition: form-data; name=\"two\"\r\n\r\ntwo\r\n":utf8,
+      "--9923848\r\n":utf8,
+      "Content-Disposition: form-data; name=\"xml\"\r\nContent-Type: application/xml\r\n\r\nxml\r\n":utf8,
       "--9923848--":utf8,
     >>)
 
