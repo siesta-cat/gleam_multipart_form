@@ -76,7 +76,13 @@ fn parse_field(
         bit_array.to_string(body)
         |> result.replace_error("Invalid utf-8 string in string field"),
       )
-      #(field, field.String(content))
+      case list.key_find(headers, "content-type") {
+        Ok(content_type) -> #(
+          field,
+          field.StringWithType(content:, content_type:),
+        )
+        Error(_) -> #(field, field.String(content))
+      }
     }
     option.Some(filename) -> {
       use header <- result.map(
