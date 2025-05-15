@@ -70,6 +70,7 @@ pub fn to_request_test() {
   let form = [
     #("describe", field.String("description")),
     #("content", field.String("disposed")),
+    #("json", field.StringWithType("json", "application/json")),
   ]
 
   let expected_req =
@@ -83,6 +84,8 @@ pub fn to_request_test() {
       "Content-Disposition: form-data; name=\"describe\"\r\n\r\ndescription\r\n":utf8,
       "--gleam_multipart_form\r\n":utf8,
       "Content-Disposition: form-data; name=\"content\"\r\n\r\ndisposed\r\n":utf8,
+      "--gleam_multipart_form\r\n":utf8,
+      "Content-Disposition: form-data; name=\"json\"\r\nContent-Type: application/json\r\n\r\njson\r\n":utf8,
       "--gleam_multipart_form--":utf8,
     >>)
 
