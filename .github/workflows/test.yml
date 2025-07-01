@@ -21,7 +21,7 @@ jobs:
           for line in $file; do
             echo $line >> $GITHUB_OUTPUT
           done
-      - uses: erlef/setup-beam@75edbb82877ab10edeb12a99c3cf2f0909f3dc87 # v1
+      - uses: erlef/setup-beam@6389fe58dcb1ee91fd829c7c65bf8771b06dacc4 # v1
         with:
           otp-version: ${{ steps.tool_versions.outputs.erlang }}
           gleam-version: ${{ steps.tool_versions.outputs.gleam }}
